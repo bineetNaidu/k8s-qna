@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta19
+kind: Config
+metadata:
+  name: k8s-qna
+build:
+  artifacts:
+    - image: bineetnaidu/qna-auth
+      context: services/auth
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - k8s/auth-mongo.deployment.yaml
+      - k8s/auth.deployment.yaml
+      - k8s/ingress.yaml
