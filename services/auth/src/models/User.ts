@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+interface UserDoc extends mongoose.Document {
+  username: string;
+  password: string;
+  email: string;
+}
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -22,6 +28,6 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model<UserDoc>('User', UserSchema);
 
 export { User };
